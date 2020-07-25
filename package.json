@@ -1,7 +1,13 @@
 {
   "name": "dev-browser",
   "version": "0.1.0",
+  "description": "Um navegador simples para desenvolvedores web",
+  "license": "GPL3",
   "private": true,
+  "author": {
+    "name": "Jocian de Souza Mendonça",
+    "email": "jocianmendonca@outlook.com"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -44,11 +50,5 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
   }
 }
