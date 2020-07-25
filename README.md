@@ -1,24 +1,9 @@
-# dev-browser
+# Dev Browser
 
-## Project setup
-```
-yarn install
-```
+A simple browser for developers
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+<!-- GH_TOKEN=https://github.com/settings/tokens -->
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Publish
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`yarn electron:build -p always`

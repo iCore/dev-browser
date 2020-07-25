@@ -18,8 +18,13 @@
     "postuninstall": "electron-builder install-app-deps"
   },
   "main": "background.js",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/iCore/dev-browser"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
+    "electron-updater": "^4.3.1",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",

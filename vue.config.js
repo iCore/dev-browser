@@ -8,7 +8,11 @@ module.exports = {
       outputDir: 'dist/electron',
       appId: 'com.icore.dev-browser',
       copyright: 'Copyright © 2020 by Jocian de Souza Mendonça',
-      asar: true
+      asar: true,
+
+      builderOptions: {
+        publish: ['github']
+      }
     }
   }
 }
