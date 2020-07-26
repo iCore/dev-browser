@@ -9,7 +9,9 @@ export default {
   methods: {
     ...mapActions(['toggleDisplayNavBar']),
 
-    minimize () { window.minimize() }
+    minimize () { window.minimize() },
+
+    close () { window.close() }
   }
 }
 </script>
@@ -35,7 +37,7 @@ export default {
     <v-btn icon x-small @click="minimize">
       <v-icon x-small>fa-minus</v-icon>
     </v-btn>
-    <v-btn icon x-small>
+    <v-btn icon x-small @click="close">
       <v-icon x-small>fa-times</v-icon>
     </v-btn>
   </v-system-bar>
