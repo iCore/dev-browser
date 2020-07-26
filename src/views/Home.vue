@@ -1,9 +1,20 @@
-<template>
-  <div class="home">Home</div>
-</template>
-
 <script>
 export default {
   name: 'Home'
 }
 </script>
+
+<template>
+  <webview ref="web" id="webview" src="https://google.com"></webview>
+</template>
+
+<style lang="scss" scoped>
+#webview {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+</style>
