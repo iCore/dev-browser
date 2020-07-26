@@ -1,10 +1,11 @@
 <script>
 import SystemBar from '@/components/system-bar.vue'
+import NavBar from '@/components/nav-bar.vue'
 
 export default {
   name: 'App',
 
-  components: { SystemBar }
+  components: { SystemBar, NavBar }
 }
 </script>
 
@@ -12,7 +13,8 @@ export default {
   <v-app>
     <system-bar />
     <v-divider></v-divider>
-    <v-main>
+    <nav-bar />
+    <v-main app>
       <router-view />
     </v-main>
   </v-app>
