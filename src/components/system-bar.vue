@@ -1,6 +1,16 @@
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  name: 'SystemBar'
+  name: 'SystemBar',
+
+  computed: mapState({ win: 'window' }),
+
+  methods: {
+    ...mapActions(['toggleDisplayNavBar']),
+
+    minimize () { window.minimize() }
+  }
 }
 </script>
 
@@ -12,8 +22,8 @@ export default {
       <v-icon x-small>fa-info</v-icon>
     </v-btn>
     <v-divider class="mx-2" inset vertical />
-    <v-btn icon x-small>
-      <v-icon x-small>fa-chevron-down</v-icon>
+    <v-btn icon x-small @click="toggleDisplayNavBar">
+      <v-icon x-small>{{ win.displayNavBar ? 'fa-chevron-up' : 'fa-chevron-down' }}</v-icon>
     </v-btn>
     <v-btn icon x-small>
       <v-icon x-small>fa-table</v-icon>
@@ -22,7 +32,7 @@ export default {
       <v-icon x-small>fa-cog</v-icon>
     </v-btn>
     <v-divider class="mx-2" inset vertical />
-    <v-btn icon x-small>
+    <v-btn icon x-small @click="minimize">
       <v-icon x-small>fa-minus</v-icon>
     </v-btn>
     <v-btn icon x-small>

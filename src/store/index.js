@@ -4,11 +4,20 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    window: {
+      displayNavBar: false
+    }
+  },
 
-  mutations: {},
+  mutations: {
+    SET_WINDOW_STATE: (state, value) => Object.assign(state.window, { ...value })
+  },
 
-  actions: {},
+  actions: {
+    toggleDisplayNavBar: ({ commit, state }) =>
+      commit('SET_WINDOW_STATE', { displayNavBar: !state.window.displayNavBar })
+  },
 
   modules: {}
 })

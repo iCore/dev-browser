@@ -1,9 +1,13 @@
 'use strict'
 
+import path from 'path'
+
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import { autoUpdater } from 'electron-updater'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+
+import backend from './backend'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -33,6 +37,7 @@ function createWindow () {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+      preload: path.join(__dirname, 'preload.js'),
       webviewTag: true
     }
   })
@@ -54,6 +59,8 @@ function createWindow () {
   win.on('ready-to-show', () => win && win.show())
 
   win.on('closed', () => (win = null))
+
+  backend.init(win)
 }
 
 // Quit when all windows are closed.

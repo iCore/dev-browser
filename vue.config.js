@@ -10,6 +10,8 @@ module.exports = {
       copyright: 'Copyright © 2020 by Jocian de Souza Mendonça',
       asar: true,
 
+      preload: 'src/preload.js',
+
       builderOptions: {
         publish: ['github']
       }
