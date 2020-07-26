@@ -1,19 +1,16 @@
 <script>
 import SystemBar from '@/components/system-bar.vue'
-import NavBar from '@/components/nav-bar.vue'
 
 export default {
   name: 'App',
 
-  components: { SystemBar, NavBar }
+  components: { SystemBar }
 }
 </script>
 
 <template>
   <v-app>
     <system-bar />
-    <v-divider></v-divider>
-    <nav-bar />
     <v-main app>
       <router-view />
     </v-main>

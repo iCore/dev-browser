@@ -1,11 +1,17 @@
 <script>
+import NavBar from '@/components/nav-bar.vue'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: { NavBar }
 }
 </script>
 
 <template>
-  <webview ref="web" id="webview" src="https://google.com"></webview>
+  <div>
+    <nav-bar />
+    <webview ref="web" id="webview" src="https://google.com"></webview>
+  </div>
 </template>
 
 <style lang="scss" scoped>
