@@ -10,7 +10,7 @@ export default {
 
 <template>
   <v-app>
-    <system-bar />
+    <system-bar v-if="$route.path !== '/'" />
     <v-main app>
       <router-view />
     </v-main>
@@ -22,4 +22,9 @@ html {
   overflow-y: hidden !important;
   user-select: none;
 }
+
+body {
+  border: 1px solid #000000de;
+}
+
 </style>

@@ -13,7 +13,9 @@ module.exports = {
       preload: 'src/preload.js',
 
       builderOptions: {
-        publish: ['github']
+        publish: [
+          { provider: 'github', token: process.env.GH_TOKEN }
+        ]
       }
     }
   }

@@ -4,21 +4,25 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'SystemBar',
 
-  computed: mapState({ win: 'window' }),
+  computed: {
+    ...mapState({ win: 'window' }),
+
+    title () { return window.app.title }
+  },
 
   methods: {
     ...mapActions(['toggleDisplayNavBar']),
 
-    minimize () { window.minimize() },
+    minimize () { window.app.minimize() },
 
-    close () { window.close() }
+    close () { window.app.close() }
   }
 }
 </script>
 
 <template>
   <v-system-bar id="system-bar" app>
-    <span>Dev Browser</span>
+    <span>{{ title }}</span>
     <v-spacer />
     <v-btn icon x-small>
       <v-icon x-small>fa-info</v-icon>
