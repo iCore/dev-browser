@@ -33,7 +33,7 @@ export default {
         // autoUpdater.on('update-available', () => e.reply('update-available', true))
         autoUpdater.on('update-not-available', () => e.reply('app-relase'))
         autoUpdater.on('download-progress', status => e.reply('download-progress', status))
-        // autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall(true, true))
+        autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall(true, true))
       } catch (e) { console.log(e) }
     })
   }
