@@ -24,7 +24,12 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
     minWidth: 400,
-    minHeight: 300,
+    minHeight: 200,
+
+    width: 400,
+    height: 200,
+
+    resizable: false,
 
     useContentSize: true,
     center: true,
@@ -62,7 +67,7 @@ function createWindow () {
     if (win) {
       win.show()
 
-      if (!process.env.IS_TEST) win.webContents.openDevTools()
+      if (isDevelopment) win.webContents.openDevTools()
     }
   })
 
@@ -88,7 +93,8 @@ app.on('activate', () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
+  // !process.env.IS_TEST
+  if (isDevelopment) {
     // Install Vue Devtools
     try {
       await installExtension(VUEJS_DEVTOOLS)

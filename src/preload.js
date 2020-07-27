@@ -1,16 +1,21 @@
 import { ipcRenderer } from 'electron'
-// import { autoUpdater } from 'electron-updater'
+import prettyBytes from 'pretty-bytes'
 
 import { displayName } from '../package.json'
 
 window.app = {
   title: displayName,
 
-  checkForUpdates () {
+  prettyBytes,
+
+  displayHome () { ipcRenderer.send('display-home') },
+
+  checkForUpdates (callback) {
     return new Promise((resolve, reject) => {
       try {
         ipcRenderer.send('check-for-updates')
-        ipcRenderer.on('update-available', resolve)
+        ipcRenderer.on('download-progress', (_, status) => callback(status))
+        ipcRenderer.on('app-relase', resolve)
       } catch (e) {
         reject(e)
       }

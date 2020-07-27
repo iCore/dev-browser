@@ -4,6 +4,6 @@ A simple browser for developers
 
 <!-- GH_TOKEN=https://github.com/settings/tokens -->
 
-## Publish
+<!-- ## Publish
 
-`yarn electron:build -p always`
+`yarn electron:build -p always` -->
