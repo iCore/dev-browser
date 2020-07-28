@@ -19,8 +19,7 @@ export default {
     })
 
     ipcMain.on('display-home', () => {
-      win.setResizable(true)
-      win.setSize(600, 400)
+      win.setSize(600, 400, true)
       win.center()
     })
 

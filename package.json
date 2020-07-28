@@ -1,7 +1,7 @@
 {
   "name": "dev-browser",
   "displayName": "Dev Browser",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "Um navegador simples para desenvolvedores web",
   "license": "GPL-3.0",
   "copyright": "Copyright © 2020",
@@ -17,7 +17,6 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "dev": "yarn electron:serve",
     "release": "yarn electron:build --publish always"
   },
   "main": "background.js",

@@ -4,15 +4,32 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'NavBar',
 
-  computed: mapState({ win: 'window', web: 'webview' }),
-
-  data: () => ({ url: '' }),
-
-  watch: {
-    'web.currentURL' (value) { this.url = value }
+  props: {
+    state: {
+      type: Object,
+      required: false,
+      default: () => ({ canGoBack: false, canGoForward: false })
+    }
   },
 
-  methods: mapActions(['setCurrentURL']),
+  computed: {
+    ...mapState({ win: 'window', web: 'webview' }),
+
+    url: {
+      get () { return this.web.currentURL },
+      set (value) { this.setCurrentURL(value) }
+    }
+  },
+
+  methods: {
+    ...mapActions(['setCurrentURL']),
+
+    emitEvent (name, value) {
+      this.$emit(name, value)
+
+      value && this.setCurrentURL(value)
+    }
+  },
 
   beforeMount () {
     this.url = this.web.currentURL
@@ -23,13 +40,13 @@ export default {
 <template>
   <v-expand-transition>
     <v-app-bar v-if="win.displayNavBar" class="px-1 transition-fast-in-fast-out" dense flat>
-      <v-btn small icon @click="$emit('go-back')">
+      <v-btn small icon :disabled="!state.canGoBack" @click="emitEvent('go-back')">
         <v-icon small>fa-chevron-left</v-icon>
       </v-btn>
-      <v-btn small icon @click="$emit('reload')">
+      <v-btn small icon @click="emitEvent('reload')">
         <v-icon small>fa-sync-alt</v-icon>
       </v-btn>
-      <v-btn small icon @click="$emit('go-forward')">
+      <v-btn small icon :disabled="!state.canGoForward" @click="emitEvent('go-forward')">
         <v-icon small>fa-chevron-right</v-icon>
       </v-btn>
       <v-text-field
@@ -39,9 +56,9 @@ export default {
         dense
         solo
         flat
-        @keydown.enter="setCurrentURL(url)"
+        @keydown.enter="emitEvent('go-to', url)"
         />
-      <v-btn v-for="(v, i) in web.links" :key="i" small icon @click="setCurrentURL(v.url)">
+      <v-btn v-for="(v, i) in web.links" :key="i" small icon @click="emitEvent('go-to', v.url)">
         <v-icon small>{{ v.icon }}</v-icon>
       </v-btn>
     </v-app-bar>

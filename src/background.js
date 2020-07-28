@@ -6,8 +6,8 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 
-import backend from './backend'
 import { displayName } from '../package.json'
+import backend from './backend'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -28,8 +28,6 @@ function createWindow () {
 
     width: 400,
     height: 200,
-
-    resizable: false,
 
     useContentSize: true,
     center: true,
