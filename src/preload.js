@@ -1,12 +1,20 @@
+import os from 'os'
+
 import { ipcRenderer } from 'electron'
 import prettyBytes from 'pretty-bytes'
 
-import { displayName } from '../package.json'
+import { displayName, version, author, copyright } from '../package.json'
 
 window.app = {
   title: displayName,
 
+  version,
+  author,
+  copyright,
+
   prettyBytes,
+
+  system: os,
 
   displayHome () { ipcRenderer.send('display-home') },
 
@@ -26,25 +34,3 @@ window.app = {
 
   close () { ipcRenderer.send('window', 'close') }
 }
-
-// autoUpdater.on('checking-for-update', () => {
-//   window.app.updates.status = 'Verificando se existe atualizações'
-// })
-
-// autoUpdater.on('update-available', info => {
-//   window.app.updates.info = info
-// })
-
-// autoUpdater.on('update-not-available', () => {
-//   window.app.updates.status = 'Já esta na ultima versão'
-// })
-
-// autoUpdater.on('download-progress', p => {
-//   window.app.updates.progress = p
-// })
-
-// autoUpdater.on('update-downloaded', () => {
-//   autoUpdater.quitAndInstall()
-// })
-
-// autoUpdater.on('error', console.log)

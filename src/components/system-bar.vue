@@ -24,11 +24,11 @@ export default {
   <v-system-bar id="system-bar" app>
     <span>{{ title }}</span>
     <v-spacer />
-    <v-btn icon x-small>
+    <v-btn icon x-small to="/about">
       <v-icon x-small>fa-info</v-icon>
     </v-btn>
     <v-divider class="mx-2" inset vertical />
-    <v-btn icon x-small @click="toggleDisplayNavBar">
+    <v-btn v-if="$route.path === '/home'" icon x-small @click="toggleDisplayNavBar">
       <v-icon x-small>{{ win.displayNavBar ? 'fa-chevron-up' : 'fa-chevron-down' }}</v-icon>
     </v-btn>
     <v-btn icon x-small>
@@ -52,7 +52,7 @@ export default {
 #system-bar {
   -webkit-app-region: drag;
 
-  button {
+  button, a {
     -webkit-app-region: no-drag;
 
     i { margin-right: 0 !important; }

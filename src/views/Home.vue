@@ -53,7 +53,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div id="home">
     <nav-bar :state="state" @go-back="goBack" @go-forward="goForward" @go-to="goTo" @reload="reload" />
     <v-progress-linear v-if="state.loading" indeterminate absolute />
     <webview ref="web" id="webview" :src="url"></webview>

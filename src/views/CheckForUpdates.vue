@@ -39,7 +39,7 @@ export default {
 <template>
   <v-container id="check-for-updates">
     <div class="logo">
-      <v-icon x-large>fa-terminal</v-icon>
+      <v-icon x-large>fa-laptop-code</v-icon>
       <span>{{ title }}</span>
     </div>
     <div v-if="percent > 0">
