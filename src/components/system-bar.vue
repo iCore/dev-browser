@@ -7,7 +7,9 @@ export default {
   computed: {
     ...mapState({ win: 'window' }),
 
-    title () { return window.app.title }
+    title () { return window.app.title },
+
+    isHomePage () { return this.$route.path === '/home' }
   },
 
   methods: {
@@ -32,7 +34,7 @@ export default {
       <v-icon x-small>fa-info</v-icon>
     </v-btn>
     <v-divider class="mx-2" inset vertical />
-    <v-btn v-if="$route.path === '/home'" icon x-small @click="toggleDisplayNavBar">
+    <v-btn v-if="isHomePage" class="mx-1" icon x-small @click="toggleDisplayNavBar">
       <v-icon x-small>{{ win.displayNavBar ? 'fa-chevron-up' : 'fa-chevron-down' }}</v-icon>
     </v-btn>
     <!-- <v-btn icon x-small>

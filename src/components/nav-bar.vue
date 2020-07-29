@@ -58,6 +58,10 @@ export default {
         flat
         @keydown.enter="emitEvent('go-to', url)"
         />
+      <v-btn icon small @click="$emit('dev-tools')">
+        <v-icon x-small>fa-code</v-icon>
+      </v-btn>
+      <v-divider class="mx-2" vertical />
       <v-btn v-for="(v, i) in web.links" :key="i" small icon @click="emitEvent('go-to', v.url)">
         <v-icon small>{{ v.icon }}</v-icon>
       </v-btn>

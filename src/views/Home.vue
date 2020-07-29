@@ -31,6 +31,14 @@ export default {
 
     reload () { this.$refs.web.reloadIgnoringCache() },
 
+    toggleDevTools () {
+      if (this.$refs.web.isDevToolsOpened()) {
+        this.$refs.web.closeDevTools()
+      } else {
+        this.$refs.web.openDevTools()
+      }
+    },
+
     setState () {
       this.state.canGoBack = this.$refs.web.canGoBack()
       this.state.canGoForward = this.$refs.web.canGoForward()
@@ -54,7 +62,14 @@ export default {
 
 <template>
   <div id="home">
-    <nav-bar :state="state" @go-back="goBack" @go-forward="goForward" @go-to="goTo" @reload="reload" />
+    <nav-bar
+      :state="state"
+      @go-back="goBack"
+      @go-forward="goForward"
+      @go-to="goTo"
+      @reload="reload"
+      @dev-tools="toggleDevTools"
+      />
     <v-progress-linear v-if="state.loading" indeterminate absolute />
     <webview ref="web" id="webview" :src="url"></webview>
   </div>
