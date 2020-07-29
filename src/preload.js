@@ -1,4 +1,5 @@
 import os from 'os'
+import path from 'path'
 
 import { ipcRenderer } from 'electron'
 import prettyBytes from 'pretty-bytes'
@@ -8,7 +9,7 @@ import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 import { displayName, version, author, copyright } from '../package.json'
 
 const isDev = process.env.NODE_ENV === 'development'
-const dataPath = isDev ? './dist' : ''
+const dataPath = path.resolve(isDev ? 'dist' : '')
 
 window.app = {
   title: displayName,
