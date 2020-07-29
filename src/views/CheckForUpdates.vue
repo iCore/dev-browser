@@ -25,13 +25,17 @@ export default {
   mounted () {
     this.progress.bind(this)
 
+    const redirect = e => {
+      this.$router.push('/home')
+      window.app.displayHome()
+
+      e && console.error(e)
+    }
+
     window.app
       .checkForUpdates(this.progress)
-      .then(() => {
-        this.$router.push('/home')
-        window.app.displayHome()
-      })
-      .catch(console.error)
+      .then(redirect)
+      .catch(redirect)
   }
 }
 </script>

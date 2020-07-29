@@ -37,7 +37,8 @@ export default {
         autoUpdater.on('update-not-available', () => event.reply('app-relase'))
         autoUpdater.on('download-progress', status => event.reply('download-progress', status))
         autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall(true, true))
-      } catch (e) { console.log(e) }
+        autoUpdater.on('error', e => event.reply('update-error', e))
+      } catch (e) { console.log(e.toString()) }
     })
   }
 }

@@ -29,7 +29,8 @@ window.app = {
       try {
         ipcRenderer.send('check-for-updates')
         ipcRenderer.on('download-progress', (_, status) => callback(status))
-        ipcRenderer.on('app-relase', resolve)
+        ipcRenderer.on('app-relase', () => resolve())
+        ipcRenderer.on('update-error', (_, err) => reject(err))
       } catch (e) {
         reject(e)
       }
