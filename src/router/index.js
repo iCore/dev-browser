@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import CheckForUpdate from '../views/CheckForUpdates'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
+import Configurations from '../views/Configurations.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/configurations',
+    name: 'Configurations',
+    component: Configurations
   }
 ]
 

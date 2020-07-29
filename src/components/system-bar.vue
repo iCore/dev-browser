@@ -22,6 +22,7 @@ export default {
 
 <template>
   <v-system-bar id="system-bar" app>
+    <v-icon small>fa-laptop-code</v-icon>
     <span>{{ title }}</span>
     <v-spacer />
     <v-btn icon x-small to="/about">
@@ -31,10 +32,10 @@ export default {
     <v-btn v-if="$route.path === '/home'" icon x-small @click="toggleDisplayNavBar">
       <v-icon x-small>{{ win.displayNavBar ? 'fa-chevron-up' : 'fa-chevron-down' }}</v-icon>
     </v-btn>
-    <v-btn icon x-small>
+    <!-- <v-btn icon x-small>
       <v-icon x-small>fa-table</v-icon>
-    </v-btn>
-    <v-btn icon x-small>
+    </v-btn> -->
+    <v-btn to="/configurations" icon x-small>
       <v-icon x-small>fa-cog</v-icon>
     </v-btn>
     <v-divider class="mx-2" inset vertical />

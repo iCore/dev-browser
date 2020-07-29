@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     window: {
-      displayNavBar: false
+      displayNavBar: false,
+      alwaysOnTop: false
     },
 
     webview: {
@@ -28,7 +29,10 @@ export default new Vuex.Store({
       commit('SET_WINDOW_STATE', { displayNavBar: !state.window.displayNavBar }),
 
     setCurrentURL: ({ commit }, value) =>
-      commit('SET_WEBVIEW_STATE', { currentURL: value })
+      commit('SET_WEBVIEW_STATE', { currentURL: value }),
+
+    toggleAlwaysOnTop: ({ commit }, value) =>
+      commit('SET_WINDOW_STATE', { alwaysOnTop: value })
   },
 
   modules: {}

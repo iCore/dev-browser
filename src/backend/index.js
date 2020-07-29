@@ -13,9 +13,13 @@ export default {
 
     // autoUpdater.autoDownload = false
 
-    ipcMain.on('window', (event, state) => {
+    ipcMain.on('window', (_, state) => {
       if (state === 'minimize') win.minimize()
       if (state === 'close') win.close()
+    })
+
+    ipcMain.on('always-on-top', (_, value) => {
+      win.setAlwaysOnTop(value)
     })
 
     ipcMain.on('display-home', () => {
@@ -23,15 +27,15 @@ export default {
       win.center()
     })
 
-    ipcMain.on('check-for-updates', e => {
-      if (isDevelopment) return e.reply('app-relase')
+    ipcMain.on('check-for-updates', event => {
+      if (isDevelopment) return event.reply('app-relase')
 
       try {
         autoUpdater.checkForUpdates()
 
-        // autoUpdater.on('update-available', () => e.reply('update-available', true))
-        autoUpdater.on('update-not-available', () => e.reply('app-relase'))
-        autoUpdater.on('download-progress', status => e.reply('download-progress', status))
+        // autoUpdater.on('update-available', () => event.reply('update-available', true))
+        autoUpdater.on('update-not-available', () => event.reply('app-relase'))
+        autoUpdater.on('download-progress', status => event.reply('download-progress', status))
         autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall(true, true))
       } catch (e) { console.log(e) }
     })

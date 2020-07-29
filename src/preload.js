@@ -30,6 +30,8 @@ window.app = {
     })
   },
 
+  setAlwaysOnTop (value) { ipcRenderer.send('always-on-top', value) },
+
   minimize () { ipcRenderer.send('window', 'minimize') },
 
   close () { ipcRenderer.send('window', 'close') }
