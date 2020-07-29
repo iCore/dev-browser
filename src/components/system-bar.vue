@@ -11,11 +11,14 @@ export default {
   },
 
   methods: {
-    ...mapActions(['toggleDisplayNavBar']),
+    ...mapActions(['toggleDisplayNavBar', 'saveState']),
 
     minimize () { window.app.minimize() },
 
-    close () { window.app.close() }
+    close () {
+      this.saveState()
+      window.app.close()
+    }
   }
 }
 </script>

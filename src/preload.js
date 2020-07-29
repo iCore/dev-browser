@@ -2,8 +2,13 @@ import os from 'os'
 
 import { ipcRenderer } from 'electron'
 import prettyBytes from 'pretty-bytes'
+import { JsonDB } from 'node-json-db'
+import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 
 import { displayName, version, author, copyright } from '../package.json'
+
+const isDev = process.env.NODE_ENV === 'development'
+const dataPath = isDev ? './dist' : ''
 
 window.app = {
   title: displayName,
@@ -16,7 +21,7 @@ window.app = {
 
   system: os,
 
-  displayHome () { ipcRenderer.send('display-home') },
+  database: new JsonDB(new Config(`${dataPath}/icore-config`, true, isDev, '/')),
 
   checkForUpdates (callback) {
     return new Promise((resolve, reject) => {
@@ -29,6 +34,8 @@ window.app = {
       }
     })
   },
+
+  displayHome () { ipcRenderer.send('display-home') },
 
   setAlwaysOnTop (value) { ipcRenderer.send('always-on-top', value) },
 

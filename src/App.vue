@@ -1,10 +1,18 @@
 <script>
+import { mapActions } from 'vuex'
+
 import SystemBar from '@/components/system-bar.vue'
 
 export default {
   name: 'App',
 
-  components: { SystemBar }
+  components: { SystemBar },
+
+  methods: mapActions(['loadState']),
+
+  beforeMount () {
+    this.loadState()
+  }
 }
 </script>
 

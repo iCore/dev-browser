@@ -19,8 +19,10 @@ export default {
     }
   },
 
-  methods: {
-    ...mapActions(['toggleAlwaysOnTop'])
+  methods: mapActions(['toggleAlwaysOnTop', 'saveState']),
+
+  beforeDestroy () {
+    this.saveState()
   }
 }
 </script>
