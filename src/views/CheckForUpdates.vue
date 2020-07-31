@@ -1,10 +1,10 @@
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'CheckForUpdates',
 
-  computed: {
-    title () { return window.app.title }
-  },
+  computed: mapState(['app']),
 
   data: () => ({
     speed: '0 B',
@@ -25,14 +25,17 @@ export default {
   mounted () {
     this.progress.bind(this)
 
+    const { __core__ } = global
+
     const redirect = e => {
       this.$router.push('/home')
-      window.app.displayHome()
 
-      e && console.error(e)
+      __core__.window.displayHome()
+
+      e && console.error(e.toString())
     }
 
-    window.app
+    __core__.window
       .checkForUpdates(this.progress)
       .then(redirect)
       .catch(redirect)
@@ -44,7 +47,7 @@ export default {
   <v-container id="check-for-updates">
     <div class="logo">
       <v-icon x-large>fa-laptop-code</v-icon>
-      <span>{{ title }}</span>
+      <span>{{ app.title }}</span>
     </div>
     <div v-if="percent > 0">
       <span class="status">Baixando: {{ transferred }} de {{ total }} ({{ speed }}/s)</span>

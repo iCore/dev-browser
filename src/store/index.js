@@ -3,10 +3,12 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const { database } = window.app
+const { app, database } = global.__core__
 
 export default new Vuex.Store({
   state: {
+    app,
+
     window: {
       displayNavBar: false,
       alwaysOnTop: false
@@ -33,26 +35,23 @@ export default new Vuex.Store({
     setCurrentURL: ({ commit }, value) =>
       commit('SET_WEBVIEW_STATE', { currentURL: value }),
 
-    toggleAlwaysOnTop: ({ commit }, value) =>
-      commit('SET_WINDOW_STATE', { alwaysOnTop: value }),
+    toggleAlwaysOnTop ({ commit }, value) {
+      commit('SET_WINDOW_STATE', { alwaysOnTop: value })
+
+      global.__core__.window.setAlwaysOnTop(value)
+    },
 
     loadState ({ commit, state }) {
-      const data = database.getData('/')
+      const win = database.load('/window')
 
-      if (!data.window) data.window = {}
-      if (!data.webview) data.webview = { currentURL: '' }
-      if (!data.webview.links) data.webview.links = state.webview.links
+      commit('SET_WINDOW_STATE', win)
+      commit('SET_WEBVIEW_STATE', database.load('/webview'))
 
-      state.webview.links.forEach(e => {
-        if (e.default && data.webview.currentURL === '') data.webview.currentURL = e.url
-      })
-
-      commit('SET_WINDOW_STATE', data.window)
-      commit('SET_WEBVIEW_STATE', data.webview)
+      global.__core__.window.setAlwaysOnTop(win.alwaysOnTop || state.window.alwaysOnTop)
     },
 
     saveState ({ commit, state }) {
-      database.push('/', {
+      database.save({
         window: {
           alwaysOnTop: state.window.alwaysOnTop
         },

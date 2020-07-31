@@ -13,12 +13,6 @@ export default {
     }
   },
 
-  watch: {
-    'win.alwaysOnTop': (value) => {
-      window.app.setAlwaysOnTop(value)
-    }
-  },
-
   methods: mapActions(['toggleAlwaysOnTop', 'saveState']),
 
   beforeDestroy () {

@@ -5,9 +5,7 @@ export default {
   name: 'SystemBar',
 
   computed: {
-    ...mapState({ win: 'window' }),
-
-    title () { return window.app.title },
+    ...mapState({ win: 'window', app: 'app' }),
 
     isHomePage () { return this.$route.path === '/home' }
   },
@@ -15,11 +13,12 @@ export default {
   methods: {
     ...mapActions(['toggleDisplayNavBar', 'saveState']),
 
-    minimize () { window.app.minimize() },
+    minimize () { global.__core__.window.minimize() },
 
     close () {
       this.saveState()
-      window.app.close()
+
+      global.__core__.window.close()
     }
   }
 }
@@ -28,7 +27,7 @@ export default {
 <template>
   <v-system-bar id="system-bar" app>
     <v-icon small>fa-laptop-code</v-icon>
-    <span>{{ title }}</span>
+    <span>{{ app.title }}</span>
     <v-spacer />
     <v-btn icon x-small to="/about">
       <v-icon x-small>fa-info</v-icon>

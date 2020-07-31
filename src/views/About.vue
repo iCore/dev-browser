@@ -4,17 +4,11 @@ export default {
   name: 'About',
 
   computed: {
-    app () { return window.app },
-    os () { return window.app.system },
-    cpu () { return window.app.system.cpus()[0] || false },
-    userInfo () { return window.app.system.userInfo() },
-    network () {
-      try {
-        return Object.values(window.app.system.networkInterfaces())[1][0]
-      } catch (e) {
-        return false
-      }
-    }
+    system () { return global.__core__.system },
+
+    app () { return global.__core__.app },
+
+    networks () { return global.__core__.system.network }
   }
 
   // data: () => ({
@@ -45,39 +39,53 @@ export default {
       <v-divider />
       <v-card-text>
         <v-row>
+          <v-col cols="12" class="text-center">Desenvolvido por <em>{{ app.author.name }}</em></v-col>
+          <v-col cols="12" class="text-center">Contato: <em>{{ app.author.email }}</em></v-col>
+        </v-row>
+        <v-divider class="my-3" />
+        <v-row>
           <v-col class="shrink"><strong>CPU:</strong></v-col>
-          <v-col>{{ cpu.model }}</v-col>
+          <v-col>{{ system.cpu.model }}</v-col>
         </v-row>
         <v-row>
           <v-col class="shrink"><strong>Memória:</strong></v-col>
-          <v-col>{{ app.prettyBytes(os.totalmem()) }}</v-col>
+          <v-col>{{ system.memory.total }}</v-col>
         </v-row>
         <!-- <v-row>
           <v-col><v-progress-linear /></v-col>
         </v-row> -->
         <v-row>
           <v-col class="shrink"><strong>Plataforma:</strong></v-col>
-          <v-col>{{ os.type() }} - {{ os.release() }}</v-col>
+          <v-col>{{ system.os.type }} - {{ system.os.release }}</v-col>
         </v-row>
         <v-divider class="my-2" />
         <v-row>
-          <v-col><strong>Network:</strong></v-col>
+          <v-col><strong>Networks:</strong></v-col>
         </v-row>
-        <v-row class="mx-5">
-          <v-col class="shrink"><strong>IP:</strong></v-col>
-          <v-col>{{ network.address }}</v-col>
-        </v-row>
-        <v-row class="mx-5">
-          <v-col class="shrink"><strong>Mascara:</strong></v-col>
-          <v-col>{{ network.netmask }}</v-col>
-        </v-row>
-        <v-row class="mx-5">
-          <v-col class="shrink"><strong>MAC:</strong></v-col>
-          <v-col>{{ network.mac }}</v-col>
+        <v-row v-for="(v1, i1) in networks" :key="i1" class="mx-5">
+          <v-col v-for="(v2, i2) in v1" :key="i2">
+            <v-row>
+              <v-col class="shrink"><strong>{{ v2.family }}:</strong></v-col>
+              <v-col>{{ v2.address }}</v-col>
+            </v-row>
+            <v-row>
+              <v-col class="shrink"><strong>Mascara:</strong></v-col>
+              <v-col>{{ v2.netmask }}</v-col>
+            </v-row>
+            <v-row>
+              <v-col class="shrink"><strong>MAC:</strong></v-col>
+              <v-col>{{ v2.mac }}</v-col>
+            </v-row>
+          </v-col>
+          <v-col cols="12"><v-divider /></v-col>
         </v-row>
         <v-row>
-          <v-col class="shrink"></v-col>
-          <v-col></v-col>
+          <v-col class="shrink"><strong>Usuários:</strong></v-col>
+          <v-col>{{ system.user.username }}</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="shrink"><strong>Pasta pessoal:</strong></v-col>
+          <v-col>{{ system.user.homedir }}</v-col>
         </v-row>
         <v-row>
           <v-col class="shrink"></v-col>
@@ -105,7 +113,7 @@ export default {
 
     strong {
       display: block;
-      width: 80px;
+      width: 100px;
     }
   }
 }
