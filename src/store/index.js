@@ -15,8 +15,8 @@ export default new Vuex.Store({
     webview: {
       currentURL: '',
       links: [
-        { url: 'https://localhost:3000', icon: 'fa-home', default: false },
-        { url: 'https://google.com', icon: 'fa-globe', default: true }
+        { url: 'http://localhost:3000', icon: 'fa-home', default: false },
+        { url: 'https://www.google.com', icon: 'fa-globe', default: true }
       ]
     }
   },
@@ -41,6 +41,7 @@ export default new Vuex.Store({
 
       if (!data.window) data.window = {}
       if (!data.webview) data.webview = { currentURL: '' }
+      if (!data.webview.links) data.webview.links = state.webview.links
 
       state.webview.links.forEach(e => {
         if (e.default && data.webview.currentURL === '') data.webview.currentURL = e.url

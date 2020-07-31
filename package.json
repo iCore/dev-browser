@@ -2,7 +2,8 @@
   "name": "dev-browser",
   "displayName": "Dev Browser",
   "version": "1.0.0",
-  "description": "Um navegador simples para desenvolvedores web",
+  "description": "A simple browser for developers",
+  "private": true,
   "license": "GPL-3.0",
   "copyright": "Copyright © 2020",
   "author": {

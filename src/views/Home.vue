@@ -49,7 +49,7 @@ export default {
     this.url = this.web.currentURL
 
     this.$refs.web.addEventListener('did-start-loading', () => (this.state.loading = true))
-    this.$refs.web.addEventListener('did-finish-load', () => (this.state.loading = false))
+    this.$refs.web.addEventListener('did-stop-loading', () => (this.state.loading = false))
     this.$refs.web.addEventListener('did-navigate', ({ url }) => {
       if (url) {
         this.setCurrentURL(url)

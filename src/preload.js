@@ -6,10 +6,10 @@ import prettyBytes from 'pretty-bytes'
 import { JsonDB } from 'node-json-db'
 import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 
-import { displayName, version, author, copyright } from '../package.json'
+import { name, displayName, version, author, copyright } from '../package.json'
 
 const isDev = process.env.NODE_ENV === 'development'
-const dataPath = path.resolve(isDev ? 'dist' : '')
+const dataPath = path.resolve(os.homedir(), '.icore', name)
 
 window.app = {
   title: displayName,
@@ -22,7 +22,7 @@ window.app = {
 
   system: os,
 
-  database: new JsonDB(new Config(`${dataPath}/icore-config`, true, isDev, '/')),
+  database: new JsonDB(new Config(`${dataPath}/config`, true, isDev, '/')),
 
   checkForUpdates (callback) {
     return new Promise((resolve, reject) => {
